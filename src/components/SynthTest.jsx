@@ -135,10 +135,45 @@ const SynthTest = () => {
 		};
 	}, [oscOneWave]);
 
-	//Handle attack on keydown event
+	useEffect(() => {
+		//Handle attack on keydown event
 
-	const handleKeyDown = (event) => {
-		if (synth && event.keyCode >= 65 && event.keyCode <= 90) {
+		const handleKeyDown = (event) => {
+			if (synth && event.keyCode >= 65 && event.keyCode <= 90) {
+				const noteMap = {
+					A: "C4",
+					W: "C#4",
+					S: "D4",
+					E: "D#4",
+					D: "E4",
+					F: "F4",
+					T: "F#4",
+					G: "G4",
+					Y: "G#4",
+					H: "A4",
+					U: "A#4",
+					J: "B4",
+					K: "C5",
+					O: "C#5",
+					L: "D5",
+					P: "D#5",
+				};
+
+				const note = noteMap[event.key.toUpperCase()];
+				if (!pressedKeys.includes(note)) {
+					setPressedKeys([...pressedKeys, note]);
+
+					synth.triggerAttack(note);
+					synthOsc.triggerAttack(note);
+					noise.start();
+					setIsKeyPressed(true);
+				}
+			}
+		};
+
+		//Handle release on keyup event
+
+		const handleKeyUp = (event) => {
 			const noteMap = {
 				A: "C4",
 				W: "C#4",
@@ -157,54 +192,29 @@ const SynthTest = () => {
 				L: "D5",
 				P: "D#5",
 			};
-
 			const note = noteMap[event.key.toUpperCase()];
-			if (!pressedKeys.includes(note)) {
-				setPressedKeys([...pressedKeys, note]);
-
-				synth.triggerAttack(note);
-				synthOsc.triggerAttack(note);
-				noise.start();
-				setIsKeyPressed(true);
+			const index = pressedKeys.indexOf(note);
+			if (index !== -1) {
+				const newPressedKeys = [...pressedKeys];
+				newPressedKeys.splice(index, 1);
+				setPressedKeys(newPressedKeys);
+				if (newPressedKeys.length === 0) {
+					synth.triggerRelease();
+					synthOsc.triggerRelease();
+					noise.stop();
+					setIsKeyPressed(false);
+				}
 			}
-		}
-	};
-
-	//Handle release on keyup event
-
-	const handleKeyUp = (event) => {
-		const noteMap = {
-			A: "C4",
-			W: "C#4",
-			S: "D4",
-			E: "D#4",
-			D: "E4",
-			F: "F4",
-			T: "F#4",
-			G: "G4",
-			Y: "G#4",
-			H: "A4",
-			U: "A#4",
-			J: "B4",
-			K: "C5",
-			O: "C#5",
-			L: "D5",
-			P: "D#5",
 		};
-		const note = noteMap[event.key.toUpperCase()];
-		const index = pressedKeys.indexOf(note);
-		if (index !== -1) {
-			const newPressedKeys = [...pressedKeys];
-			newPressedKeys.splice(index, 1);
-			setPressedKeys(newPressedKeys);
-			if (newPressedKeys.length === 0) {
-				synth.triggerRelease();
-				synthOsc.triggerRelease();
-				noise.stop();
-				setIsKeyPressed(false);
-			}
-		}
-	};
+
+		window.addEventListener("keydown", handleKeyDown);
+		window.addEventListener("keyup", handleKeyUp);
+
+		return () => {
+			window.removeEventListener("keydown", handleKeyDown);
+			window.removeEventListener("keyup", handleKeyUp);
+		};
+	}, [synth, pressedKeys]);
 
 	//Slider event handlers
 
@@ -371,6 +381,7 @@ const SynthTest = () => {
 			noise.set({
 				volume: Number(event.target.value),
 			});
+			console.log(noise.volume);
 		}
 	};
 
@@ -391,19 +402,14 @@ const SynthTest = () => {
 		console.log(oscOneWave);
 	};
 
-	const startSynth = async () => {
-		await Tone.start();
-		console.log("context started");
-	};
-
 	return (
-		<MainWrapper onKeyDown={handleKeyDown} onKeyUp={handleKeyUp}>
-			<Btn onClick={startSynth}>Start</Btn>
+		<MainWrapper>
 			<Indicator isKeyPressed={isKeyPressed}></Indicator>
 			<SawOscModule
 				handleSawDetuneFineChange={handleSawDetuneFineChange}
 				handleSawDetuneCoarseChange={handleSawDetuneCoarseChange}
 				handleOscTypeChange={handleOscTypeChange}
+				oscOneWave={oscOneWave}
 			></SawOscModule>
 			<SineOscModule
 				handleSineDetuneFineChange={handleSineDetuneFineChange}

@@ -86,7 +86,7 @@ const Slider = ({
 							: label === "Release"
 							? handleReleaseChange
 							: label === "Attack"
-							? (handleAttackChange, handleSvgAttack)
+							? handleAttackChange
 							: label === "Decay"
 							? handleDecayChange
 							: label === "Cutoff"
@@ -119,7 +119,7 @@ const Slider = ({
 							? handleDelayWet
 							: label === "Delay Feedback"
 							? handleDelayFeedback
-							: (handleNoiseVolume, handleSvgAmp)
+							: handleNoiseVolume
 					}
 				/>
 			</Container>

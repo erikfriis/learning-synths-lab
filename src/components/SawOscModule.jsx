@@ -7,11 +7,15 @@ const SawOscModule = ({
 	handleSawDetuneFineChange,
 	handleSawDetuneCoarseChange,
 	handleOscTypeChange,
+	oscOneWave,
 }) => {
 	return (
 		<Wrapper>
 			<H2 textColor="#935FA7">Saw Oscillator</H2>
-			<WaveSelector handleOscTypeChange={handleOscTypeChange}></WaveSelector>
+			<WaveSelector
+				handleOscTypeChange={handleOscTypeChange}
+				oscOneWave={oscOneWave}
+			></WaveSelector>
 			<Slider
 				label={"Detune Fine"}
 				min={0}

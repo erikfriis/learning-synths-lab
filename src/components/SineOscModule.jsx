@@ -10,7 +10,7 @@ const SineOscModule = ({
 	return (
 		<Wrapper>
 			<H2 textColor="#935FA7">Sine Oscillator</H2>
-			<WaveSelector></WaveSelector>
+
 			<Slider
 				label={"Detune Fine Sine"}
 				min={0}
