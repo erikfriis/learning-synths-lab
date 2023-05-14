@@ -1,4 +1,4 @@
-import { Wrapper } from "./Wrappers";
+import { Wrapper } from "../styling/Wrappers";
 import styled from "styled-components";
 
 const IndicatorBox = styled.div`
