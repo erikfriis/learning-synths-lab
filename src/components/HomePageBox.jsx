@@ -2,22 +2,40 @@ import styled from "styled-components";
 
 const StyledHomePageBox = styled.div`
 	padding: 10rem 5rem;
-	background-color: #fdf900;
-	color: #0000ff;
+	background-color: #935fa7;
+	color: #fbff00;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 
 	&:hover {
-		scale: 1.01;
-		background-color: #fdf900d8;
-		color: #0000ffd2;
 		cursor: pointer;
 	}
 `;
 
+const StyledContainer = styled.div`
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+`;
+const StyledText = styled.div`
+	font-size: 1.5rem;
+`;
+
 const HomePageBox = () => {
 	return (
-		<StyledHomePageBox>
-			<h1>Learning synths lab</h1>
-		</StyledHomePageBox>
+		<StyledContainer>
+			<StyledHomePageBox>
+				<h1>Go to synth playground</h1>
+				<StyledText>
+					Use your computer keyboard to play. Use the faders to manipluate the
+					sound.
+				</StyledText>
+			</StyledHomePageBox>
+		</StyledContainer>
 	);
 };
 

@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { MainWrapper } from "../components/Wrappers";
+import { MainWrapper } from "../components/styling/Wrappers";
 import HomePageBox from "../components/HomePageBox";
 
 const StartPage = () => {

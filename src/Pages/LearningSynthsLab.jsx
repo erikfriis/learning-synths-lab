@@ -1,11 +1,13 @@
-import { MainWrapper } from "../components/Wrappers";
+import { MainWrapper } from "../components/styling/Wrappers";
+import IntroPrompt from "../components/intro/IntroPrompt";
 
-import SynthTest from "../components/SynthTest";
+import Synth from "../components/Synth";
 
 const LearningSynthsLab = () => {
 	return (
 		<MainWrapper>
-			<SynthTest></SynthTest>
+			<Synth />
+			{/* <IntroPrompt></IntroPrompt> */}
 		</MainWrapper>
 	);
 };
