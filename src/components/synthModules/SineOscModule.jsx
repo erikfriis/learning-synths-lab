@@ -13,9 +13,9 @@ const SineOscModule = ({
 			<SliderNew
 				label={"Detune"}
 				min={0}
-				max={1}
+				max={500}
 				defaultValue={0.0001}
-				steps={0.0001}
+				steps={1}
 				onChange={handleSineDetuneFineChange}
 				sliderColor="#935FA7"
 			/>

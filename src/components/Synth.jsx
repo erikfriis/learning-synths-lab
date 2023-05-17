@@ -280,7 +280,7 @@ const Synth = () => {
 	useEffect(() => {
 		if (synthParams.current.synth) {
 			synthParams.current.synth.set({
-				detune: curvefit3(sawDetuneFine, 0 - 1200, 250 - 1200, 500 - 1200),
+				detune: sawDetuneFine + sawDetuneCoarse,
 			});
 		}
 	}, [sawDetuneFine]);
@@ -288,9 +288,10 @@ const Synth = () => {
 	//transpose osc 1
 
 	const handleSawDetuneCoarseChange = (event) => {
+		setSawDetuneCoarse(Number(event.target.value));
 		if (synth) {
 			synth.set({
-				detune: Number(event.target.value) + sawDetuneFine - 1200,
+				detune: Number(event.target.value) + sawDetuneFine,
 			});
 		}
 	};
@@ -301,7 +302,7 @@ const Synth = () => {
 		setSineDetuneFine(Number(event.target.value));
 		if (synthOsc) {
 			synthOsc.set({
-				detune: sineDetuneFine,
+				detune: sineDetuneFine + sineDetuneCoarse - 2400,
 			});
 		}
 	};

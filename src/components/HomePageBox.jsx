@@ -23,6 +23,11 @@ const StyledContainer = styled.div`
 `;
 const StyledText = styled.div`
 	font-size: 1.5rem;
+	margin-top: 1rem;
+`;
+const StyledParentheses = styled.div`
+	font-size: 1.25rem;
+	margin-top: 1rem;
 `;
 
 const HomePageBox = () => {
@@ -34,6 +39,10 @@ const HomePageBox = () => {
 					Use your computer keyboard to play. Use the faders to manipluate the
 					sound.
 				</StyledText>
+				<StyledParentheses>
+					(Playing the synth only works on a computer or if having a keyboard
+					connected.)
+				</StyledParentheses>
 			</StyledHomePageBox>
 		</StyledContainer>
 	);

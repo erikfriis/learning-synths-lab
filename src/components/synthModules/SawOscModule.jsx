@@ -19,9 +19,9 @@ const SawOscModule = ({
 			<SliderNew
 				label={"Detune"}
 				min={0}
-				max={1}
+				max={500}
 				defaultValue={0.0001}
-				steps={0.001}
+				steps={1}
 				onChange={handleSawDetuneFineChange}
 				sliderColor="#935FA7"
 			/>
